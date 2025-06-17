@@ -1,0 +1,5 @@
+pandas
+transformers
+PyPDF2
+matplotlib
+sec_api
