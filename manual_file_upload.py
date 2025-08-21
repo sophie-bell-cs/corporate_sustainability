@@ -30,7 +30,6 @@ for report in os.listdir('/Users/sophiebell/PycharmProjects/corporate_sustainabi
         for page in reader.pages:
             text += page.extract_text() or ""
 
-    print(report)
     company_name = input('What company is this for? (ticker or name): ')
     #uses the already built company_dict with company name and ticker data and enables reverse searching to find ticker via company name
     name_to_ticker = {v[0].lower(): k for k, v in company_dict.items()}
