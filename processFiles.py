@@ -215,7 +215,7 @@ plt.show()
 categories = list(graph_info[0][3].keys())
 csv_path = f'{directory}/csv_files'
 csv_file = os.path.join(csv_path, 'utilities.csv')
-csv_headers = ['Company', 'Report', 'Year', 'Total Word Count'] + categories + ['Total Hit Count', 'Total Frequency']
+csv_headers = ['Company', 'Report', 'Year', 'Total Word Count'] + [f'{c} (%)' for c in categories] + ['Total Hit Count', 'Total Frequency ']
 csv_rows = []
 
 for company, report, year, category_dict, Wcount, Hcount in csv_info:
