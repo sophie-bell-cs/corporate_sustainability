@@ -18,13 +18,12 @@ interest_words_file.close()
 
 def process_file(report_file):
     #uses name of 10-k file to get the company name and year
-    localFilePath = report_file.split('/')
-    fileName = localFilePath[-1].split('_')
+    localFilePath = os.path.basename(report_file)
+    fileName = localFilePath.split('_')
     company = fileName[0][:-8]
     report = '10-K'
     year = fileName[0][-8:-4]
     report_info = [company, report, year]
-    #print(f'\n\n{company} {report} {year}\n')
 
     #reads file converts contents to lower case, replaces line breaks with spaces so each word is counted regardless of place in text & capitalization
     company_report = open(report_file, 'r')
@@ -148,6 +147,7 @@ for report in os.listdir('/Users/sophiebell/PycharmProjects/corporate_sustainabi
     file_path = os.path.join('/Users/sophiebell/PycharmProjects/corporate_sustainability/sec_files/utilities', report)
 #file_path = ('/Users/sophiebell/PycharmProjects/corporate_sustainability/sec_files/utilities/AEP2019file_4')
     result = process_file(file_path) # result is the report info [company, report, year], category frequency, file word count, total hits for file
+
     graph_result = [result[0][0], result[0][1], result[0][2], result[1]] #information needed for frequency graph
     csv_result = graph_result + [result[2], result[3]] #information needed for csv
     graph_info.append(graph_result) #compiles info for graph of all files in sector
@@ -202,12 +202,11 @@ ax.set_xticks(tick_positions)
 ax.set_xticklabels(tick_labels)
 ax.set_xlabel("Company")
 ax.set_ylabel("Frequency (%)")
-ax.set_title("Climate Word Frequency by Category for Top Sustainability Companies")
+ax.set_title("Climate Word Frequency by Category")
 ax.legend(categories, title="Categories", bbox_to_anchor=(1.05, 1), loc='upper left')
 
 plt.tight_layout()
 plt.show()
-continue
 
 #creates csv
 categories = list(graph_info[0][3].keys())
