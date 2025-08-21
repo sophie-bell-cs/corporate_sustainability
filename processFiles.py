@@ -8,6 +8,9 @@ from collections import defaultdict
 import re
 import csv
 
+
+directory = '/Users/sophiebell/PycharmProjects/corporate_sustainability'
+
 interest_words_file = open('words_of_interest.txt', 'r')
 interest_words_lines = interest_words_file.readlines()
 interest_words = {}
@@ -143,8 +146,8 @@ acronyms = {'greenhouse': ['ghg'], 'climat*': ['unfccc', 'ipcc', 'ogci'], '>carb
 
 
 #iterates through each file in a given category and runs the word count function on it
-for report in os.listdir('/Users/sophiebell/PycharmProjects/corporate_sustainability/sec_files/utilities'):
-    file_path = os.path.join('/Users/sophiebell/PycharmProjects/corporate_sustainability/sec_files/utilities', report)
+for report in os.listdir(f'{directory}/sec_files/utilities'):
+    file_path = os.path.join(f'{directory}/sec_files/utilities', report)
 #file_path = ('/Users/sophiebell/PycharmProjects/corporate_sustainability/sec_files/utilities/AEP2019file_4')
     result = process_file(file_path) # result is the report info [company, report, year], category frequency, file word count, total hits for file
 
@@ -210,7 +213,7 @@ plt.show()
 
 #creates csv
 categories = list(graph_info[0][3].keys())
-csv_path = '/Users/sophiebell/PycharmProjects/corporate_sustainability/csv_files'
+csv_path = f'{directory}/csv_files'
 csv_file = os.path.join(csv_path, 'utilities.csv')
 csv_headers = ['Company', 'Report', 'Year', 'Total Word Count'] + categories + ['Total Hit Count', 'Total Frequency']
 csv_rows = []
