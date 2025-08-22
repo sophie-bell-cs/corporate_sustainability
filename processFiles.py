@@ -148,7 +148,7 @@ acronyms = {'greenhouse': ['ghg'], 'climat*': ['unfccc', 'ipcc', 'ogci'], '>carb
 #iterates through each file in a given category and runs the word count function on it
 for report in os.listdir(f'{directory}/sec_files/utilities'):
     file_path = os.path.join(f'{directory}/sec_files/utilities', report)
-#file_path = ('/Users/sophiebell/PycharmProjects/corporate_sustainability/sec_files/utilities/AEP2019file_4')
+    #file_path = ('/Users/sophiebell/PycharmProjects/corporate_sustainability/sec_files/utilities/AEP2019file_4')
     result = process_file(file_path) # result is the report info [company, report, year], category frequency, file word count, total hits for file
 
     graph_result = [result[0][0], result[0][1], result[0][2], result[1]] #information needed for frequency graph

@@ -8,6 +8,7 @@ import PyPDF2
 import difflib
 from sec_api_code import company_dict
 
+directory = '/Users/sophiebell/PycharmProjects/corporate_sustainability'
 
 def find_ticker(input_company):
     #cleans input to ensure closer match to company name
@@ -22,8 +23,8 @@ def find_ticker(input_company):
         return name_to_ticker[matches[0]]
     return None
 
-for report in os.listdir('/Users/sophiebell/PycharmProjects/corporate_sustainability/manualUpload_pdf'):
-    pdf_path = os.path.join('/Users/sophiebell/PycharmProjects/corporate_sustainability/manualUpload_pdf', report)
+for report in os.listdir(f'{directory}/manualUpload_pdf'):
+    pdf_path = os.path.join(f'{directory}/manualUpload_pdf', report)
     text = ""
     with open(pdf_path, 'rb') as file:
         reader = PyPDF2.PdfReader(file)
@@ -37,6 +38,6 @@ for report in os.listdir('/Users/sophiebell/PycharmProjects/corporate_sustainabi
     category = input('What category is this from?: ')
     year = input('What year is this report from?: ')
 
-    text_path = os.path.join(f"/Users/sophiebell/PycharmProjects/corporate_sustainability/sec_files/{category.lower()}", f'{company}{year}_companyReport')
+    text_path = os.path.join(f"{directory}/sec_files/{category.lower()}", f'{company}{year}_companyReport')
     with open(text_path + ".txt", "w") as f:
         f.write(text)

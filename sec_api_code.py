@@ -12,8 +12,10 @@ import os
 import PyPDF2
 import json
 
+directory = '/Users/sophiebell/PycharmProjects/corporate_sustainability'
+
 #convert nested json data from SEC website to csv, then dictionary
-cik_ticker_name_file = open('/Users/sophiebell/PycharmProjects/corporate_sustainability/cik_ticker_name.json', 'r')
+cik_ticker_name_file = open(f'{directory}/cik_ticker_name.json', 'r')
 cik_ticker_name_data = json.load(cik_ticker_name_file)
 cik_ticker_name = pd.DataFrame.from_dict(cik_ticker_name_data, orient='index')
 cik_ticker_name.rename(columns={'cik_str': 'CIK', 'ticker': 'Ticker', 'title': 'Company Name'}, inplace=True)
@@ -43,7 +45,7 @@ if __name__ == "__sec_api_code__":
     start = str(date_search[0])
     end = str(date_search[1])
     categ = input('Category: ')
-    directory = f'/Users/sophiebell/PycharmProjects/corporate_sustainability/sec_files/{categ.lower()}'
+    sec_directory = f'{directory}/sec_files/{categ.lower()}'
 
 
     #api key for id
@@ -82,7 +84,7 @@ if __name__ == "__sec_api_code__":
         if form_name == '10-K':
             company, year = entry[1], entry[3][:4]
             Lfile = f'{company}{year}file_{indexer}'
-            file_name = os.path.join(directory, Lfile)
+            file_name = os.path.join(sec_directory, Lfile)
             with open(file_name, 'wb') as pdf_file:
                 pdf_file.write(file_content)
                 print(f'{Lfile} created.')
@@ -93,8 +95,8 @@ if __name__ == "__sec_api_code__":
                 print(f'{documenting} amended.')
         indexer += 1
 
-    for pdf in os.listdir(directory):
-        file = os.path.join(directory, pdf)
+    for pdf in os.listdir(sec_directory):
+        file = os.path.join(sec_directory, pdf)
         text = ''
         with open(file, 'rb') as pdf_file:
             pdf_reader = PyPDF2.PdfReader(pdf_file)
